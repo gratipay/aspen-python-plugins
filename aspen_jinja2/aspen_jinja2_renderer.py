@@ -12,7 +12,6 @@ from aspen import renderers
 
 from jinja2 import BaseLoader, Environment, FileSystemLoader
 
-
 class SimplateLoader(BaseLoader):
     """Jinja2 really wants to get templates via a Loader object.
 
@@ -29,6 +28,13 @@ class SimplateLoader(BaseLoader):
 
 
 class Renderer(renderers.Renderer):
+    """Render the Jinja2 simplate
+
+    You can use "context" to inject global variables/functions
+    
+    """
+
+    ctx = {}
 
     def compile(self, filepath, raw):
         environment = self.meta
@@ -36,6 +42,15 @@ class Renderer(renderers.Renderer):
 
     def render_content(self, context):
         charset = context['response'].charset
+
+        # Pull in our requested context values
+        for key in self.ctx:
+            context[key] = self.ctx[key]
+
+        # We inject the locals into the context as globals right
+        # before we render the simplate.
+        context['globals'] = locals
+
         return self.compiled.render(context).encode(charset)
 
 
