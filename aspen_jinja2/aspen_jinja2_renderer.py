@@ -30,7 +30,7 @@ class SimplateLoader(BaseLoader):
 class Renderer(renderers.Renderer):
     """Render the Jinja2 simplate
 
-    You can use "context" to inject global variables/functions
+    You can use "ctx" to inject global variables/functions
     
     """
 
