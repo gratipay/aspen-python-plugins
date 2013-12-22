@@ -44,8 +44,7 @@ class Renderer(renderers.Renderer):
         charset = context['response'].charset
 
         # Pull in our requested context values
-        for key in self.ctx:
-            context[key] = self.ctx[key]
+        context.update(self.ctx)
 
         # We inject the locals into the context as globals right
         # before we render the simplate.
