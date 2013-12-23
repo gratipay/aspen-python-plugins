@@ -30,11 +30,11 @@ class SimplateLoader(BaseLoader):
 class Renderer(renderers.Renderer):
     """Render the Jinja2 simplate
 
-    You can use "ctx" to inject global variables/functions
+    You can use "global_context" to inject global variables/functions
     
     """
 
-    ctx = {}
+    global_context = {}
 
     def compile(self, filepath, raw):
         environment = self.meta
@@ -44,11 +44,7 @@ class Renderer(renderers.Renderer):
         charset = context['response'].charset
 
         # Pull in our requested context values
-        context.update(self.ctx)
-
-        # We inject the locals into the context as globals right
-        # before we render the simplate.
-        context['globals'] = locals
+        context.update(self.global_context)
 
         return self.compiled.render(context).encode(charset)
 
