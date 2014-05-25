@@ -6,7 +6,7 @@ except ImportError:
 
 from setuptools import setup
 
-classifiers = [ 'Development Status :: 4 - Beta'
+classifiers = ['Development Status :: 4 - Beta'
               , 'Environment :: Console'
               , 'Intended Audience :: Developers'
               , 'License :: OSI Approved :: MIT License'
@@ -32,7 +32,6 @@ setup( author = 'Chad Whitacre'
      , url = 'http://aspen.io/'
      , version = '0.4'
      , zip_safe = False
-     , install_requires = [ 'aspen>=0.23'
-                          , 'jinja2'
-                           ]
+     , install_requires = ['aspen>=0.23',
+                           'jinja2>=2.7.0']
       )
